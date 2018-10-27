@@ -5,12 +5,12 @@ admin:
   hostname: localhost
 apiEndpoints:
   authenticationAPI:
-    host: 'localhost'
+    host: '*'
     paths:
       - '/api/Token'
       - '/api/autorization'
   paymentAPI:
-    host: 'localhost'
+    host: '*'
     paths:
       - '/api/v1/public/payment'
 serviceEndpoints:
