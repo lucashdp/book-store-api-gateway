@@ -1,0 +1,38 @@
+http:
+  port: 8080
+admin:
+  port: 9876
+  hostname: localhost
+apiEndpoints:
+  authenticationAPI:
+    host: 'localhost'
+    paths:
+      - '/api/Token'
+      - '/api/autorization'
+  paymentAPI:
+    host: 'localhost'
+    paths:
+      - '/api/v1/public/payment'
+serviceEndpoints:
+  authenticationService:
+    url: 'http://localhost:52016'
+  paymentService:
+    url: 'https://api-payment.herokuapp.com'
+policies:
+  - proxy
+pipelines:
+  - name: authentication
+    apiEndpoints:
+      - authenticationAPI
+    policies:
+      - proxy:
+        - action:
+            serviceEndpoint: authenticationService
+  - name: payment
+    apiEndpoints:
+      - paymentAPI
+    policies:
+      - proxy:
+        - action:
+            serviceEndpoint: paymentService
+            changeOrigin: true
