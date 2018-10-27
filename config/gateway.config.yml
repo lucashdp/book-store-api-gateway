@@ -1,18 +1,19 @@
 http:
-  port: ${HTTP_PORT:-8080}
+  port: ${PORT}
 admin:
   port: 9876
   hostname: localhost
 apiEndpoints:
   authenticationAPI:
-    host: '*'
+    host: '${HOST}'
     paths:
       - '/api/Token'
       - '/api/autorization'
   paymentAPI:
-    host: '*'
+    host: '${HOST}'
     paths:
       - '/api/v1/public/payment'
+      - '/testes'
 serviceEndpoints:
   authenticationService:
     url: 'http://localhost:52016'
