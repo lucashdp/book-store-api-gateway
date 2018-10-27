@@ -10,9 +10,10 @@ apiEndpoints:
       - '/api/Token'
       - '/api/autorization'
   paymentAPI:
-    host: 'localhost'
+    host: 'https://book-store-api-gateway.herokuapp.com'
     paths:
       - '/api/v1/public/payment'
+      - '/testes'
 serviceEndpoints:
   authenticationService:
     url: 'http://localhost:52016'
