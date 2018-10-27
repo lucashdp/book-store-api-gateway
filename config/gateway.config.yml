@@ -1,5 +1,7 @@
 http:
   port: ${PORT}
+https:
+  port: ${PORT}
 admin:
   port: 9876
   hostname: localhost
@@ -14,11 +16,17 @@ apiEndpoints:
     paths:
       - '/api/v1/public/payment'
       - '/testes'
+  httpbin:
+    host: '${HOST}'
+    paths:
+      - '/ip'
 serviceEndpoints:
   authenticationService:
     url: 'http://localhost:52016'
   paymentService:
     url: 'https://api-payment.herokuapp.com'
+  exampleService:
+    url: 'http://httpbin.org/'
 policies:
   - proxy
 pipelines:
@@ -37,3 +45,10 @@ pipelines:
         - action:
             serviceEndpoint: paymentService
             changeOrigin: true
+  - name: example
+    apiEndpoints:
+      - httpbin
+    policies:
+      - proxy:
+        - action:
+            serviceEndpoint: exampleService
