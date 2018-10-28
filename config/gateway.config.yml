@@ -1,23 +1,23 @@
 http:
-  port: ${PORT}
+  port: process.env.PORT || '8080'
 https:
-  port: ${PORT}
+  port: process.env.PORT || '8080'
 admin:
-  port: 9876
-  hostname: localhost
+  port: process.env.PORT || '8080'
+  hostname: 'https://test-gateway-lucas.herokuapp.com'
 apiEndpoints:
   authenticationAPI:
-    host: '${HOST}'
+    host: process.env.PORT || '8080'
     paths:
       - '/api/Token'
       - '/api/autorization'
   paymentAPI:
-    host: '${HOST}'
+    host: 'https://test-gateway-lucas.herokuapp.com'
     paths:
       - '/api/v1/public/payment'
       - '/testes'
   httpbin:
-    host: '${HOST}'
+    host: 'https://test-gateway-lucas.herokuapp.com'
     paths:
       - '/ip'
 serviceEndpoints:
