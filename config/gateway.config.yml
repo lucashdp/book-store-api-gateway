@@ -1,32 +1,30 @@
 http:
-  port: ${PORT}
+  port: 4000
 https:
-  port: ${PORT}
+  port: 4000
 admin:
   port: 9876
   hostname: localhost
 apiEndpoints:
   authenticationAPI:
-    host: ${HOST}
+    host: localhost
     paths:
-      - '/api/Token'
-      - '/api/autorization'
+      - '/v1/public/*'
   paymentAPI:
-    host: ${HOST}
+    host: localhost
     paths:
-      - '/api/v1/public/payment'
-      - '/testes'
-  httpbin:
-    host: ${HOST}
+      - '/api/v1/*'
+  auditAPI:
+    host: localhost
     paths:
-      - '/ip'
+      - '/v1/public/*'
 serviceEndpoints:
   authenticationService:
-    url: 'http://localhost:52016'
+    url: 'https://autenticacao-api.herokuapp.com/'
   paymentService:
-    url: 'https://api-payment.herokuapp.com'
-  exampleService:
-    url: 'http://httpbin.org/'
+    url: 'https://paymentnodeasd.herokuapp.com/'
+  auditService:
+    url: 'https://bookstore-audit.herokuapp.com/'
 policies:
   - proxy
 pipelines:
@@ -44,11 +42,11 @@ pipelines:
       - proxy:
         - action:
             serviceEndpoint: paymentService
-            changeOrigin: true
-  - name: example
+            changeOrigin: true            
+  - name: audit
     apiEndpoints:
-      - httpbin
+      - auditAPI
     policies:
       - proxy:
         - action:
-            serviceEndpoint: exampleService
+            serviceEndpoint: auditService            
